@@ -5,6 +5,7 @@
 ### Referance Links
 - [Getting Started with Spring](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/overview-getting-started-with-spring.html)
 - [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service)
+- [JSP Tutorial](https://www.javatpoint.com/jsp-tutorial)
 - [Spring MVC @ExceptionHandler Example](https://www.mkyong.com/spring-mvc/spring-mvc-exceptionhandler-example) 
 - [Exception Handling in Spring RESTful Web Service](http://www.jcombat.com/spring/exception-handling-in-spring-restful-web-service)
 - [Spring @PropertySource example](https://www.mkyong.com/spring/spring-propertysources-example)
