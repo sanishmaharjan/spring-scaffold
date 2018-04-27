@@ -4,7 +4,7 @@ CREATE TABLE users (
   role_id      INT                       NOT NULL,
   user_name    VARCHAR(50)               NOT NULL,
   password     VARCHAR(255)              NOT NULL,
-  salt         VARCHAR(255)              NOT NULL,
+  salt         TEXT                      NOT NULL,
   is_active    BOOLEAN DEFAULT TRUE      NOT NULL,
   is_deleted    BOOLEAN DEFAULT FALSE    NOT NULL,
   delete_reason VARCHAR(255)             NULL,
