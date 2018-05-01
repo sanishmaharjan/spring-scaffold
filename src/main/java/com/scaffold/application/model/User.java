@@ -6,9 +6,27 @@ import java.util.Date;
 
 @Entity
 @Table(name = "users")
+@NamedQueries({
+        @NamedQuery(name = User.FIND_ALL, query = User.FIND_ALL_QUERY),
+        @NamedQuery(name = User.FIND_BY_USER_NAME, query = User.FIND_BY_USER_NAME_QUERY),
+        @NamedQuery(name = User.IS_ACTIVE_USER, query = User.IS_ACTIVE_USER_QUERY),
+        @NamedQuery(name = User.FIND_BY_PERSON, query = User.FIND_BY_PERSON_QUERY),
+        @NamedQuery(name = User.FIND_All_BY_ROLE, query = User.FIND_All_BY_ROLE_QUERY)
+})
 public class User implements Serializable {
 
     private static final long serialVersionUID = -101741509725795615L;
+    public static final String PREFIX = "user.";
+    public static final String FIND_ALL = PREFIX + "findAll";
+    public static final String FIND_ALL_QUERY = "SELECT u FROM User u where u.isDeleted=false";
+    public static final String FIND_BY_USER_NAME = PREFIX + "findByUserName";
+    public static final String FIND_BY_USER_NAME_QUERY = "SELECT u FROM User u where u.userName=:userName";
+    public static final String IS_ACTIVE_USER = PREFIX + "isActiveUser";
+    public static final String IS_ACTIVE_USER_QUERY = "SELECT u FROM User u where u.userName=:userName and u.isActive=true";
+    public static final String FIND_BY_PERSON = PREFIX + "findByPerson";
+    public static final String FIND_BY_PERSON_QUERY = "SELECT u FROM User u where u.person=:person and u.isDeleted=false";
+    public static final String FIND_All_BY_ROLE = PREFIX + "findAllByRole";
+    public static final String FIND_All_BY_ROLE_QUERY = "SELECT u FROM User u where u.role=:role and u.isDeleted=false";
 
     @Id
     @Column(name = "id")
@@ -35,6 +53,9 @@ public class User implements Serializable {
     @Column(name = "is_deleted")
     private Boolean isDeleted;
 
+    @Column(name = "is_active")
+    private Boolean isActive;
+
     @Column(name = "delete_reason")
     private String deleteReason;
 
@@ -53,12 +74,14 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Person person, Role role, String userName, String password, String salt) {
+    public User(Person person, Role role, String userName, String password, String salt, Boolean isActive) {
         this.person = person;
         this.role = role;
         this.userName = userName;
         this.password = password;
         this.salt = salt;
+        this.isActive = isActive;
+        this.isDeleted = false;
     }
 
     public int getId() {
@@ -115,6 +138,15 @@ public class User implements Serializable {
 
     public void setDeleted(Boolean deleted) {
         isDeleted = deleted;
+    }
+
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 
     public String getDeleteReason() {

@@ -6,9 +6,13 @@ import java.util.Date;
 
 @Entity
 @Table(name = "persons")
+@NamedQueries({@NamedQuery(name = Person.FIND_ALL, query = Person.FIND_ALL_QUERY)})
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1097169384223048665L;
+    public static final String PREFIX = "person.";
+    public static final String FIND_ALL = PREFIX + "findAll";
+    public static final String FIND_ALL_QUERY = "SELECT p FROM Person p where p.isDeleted=false";
 
     @Id
     @Column(name = "id")
@@ -52,13 +56,14 @@ public class Person implements Serializable {
     public Person() {
     }
 
-    public Person(String firstName, String middleName, String lastName, String address, String email, String gender) {
+    public Person(String firstName, String middleName, String lastName, String address, String email, String gender, Boolean isDeleted) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.address = address;
         this.email = email;
         this.gender = gender;
+        this.isDeleted = isDeleted;
     }
 
     public int getId() {
@@ -160,6 +165,7 @@ public class Person implements Serializable {
                 ", isDeleted=" + isDeleted +
                 ", deleteReason='" + deleteReason + '\'' +
                 ", deleteDate=" + deleteDate +
+                ", createdAt=" + createdAt +
                 '}';
     }
 }
